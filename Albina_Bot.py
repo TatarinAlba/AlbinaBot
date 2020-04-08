@@ -52,4 +52,7 @@ async def Random(ctx):
 async def GoodNight(ctx):
     author = ctx.message.author
     await ctx.send(f"😊😊😊Спокойной ночи, сладких снов, {author.mention}. Удачи завтра 😊😊😊")
+@Bot.command(text_commands = True)
+async def Quote(text_commands = True):
+    await ctx.send(citata())
 Bot.run(str(os.environ.get('BOT_TOKEN')))
