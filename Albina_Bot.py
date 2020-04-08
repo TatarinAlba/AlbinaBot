@@ -56,3 +56,4 @@ async def GoodNight(ctx):
     author = ctx.message.author
     await ctx.send(f"😊😊😊Спокойной ночи, сладких снов, {author.mention}. Удачи завтра 😊😊😊")
 token = os.environ.get('BOT_TOKEN')
+Bot.run(str(token))
