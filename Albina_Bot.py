@@ -41,16 +41,12 @@ def randoma():
     Bag.write(our_choice + '\n')
     rem(our_choice)
     return our_choice
-@Bot.event
-async def on_ready():
-    print("Bot is online")
-
 @Bot.command(text_commands = True)
 async def hello(ctx):
     author = ctx.message.author
     await ctx.send(f"Ну привет, {author.mention} :*")
 @Bot.command(text_commands = True)
-async def random(ctx):
+async def Random(ctx):
     await ctx.send(f"💎💎💎 Ну что же!!! Сегодня на охоту отправляется 😎😎😎||{randoma()}|| 😎😎😎. Удачи мой друг!!!. Цитатку тебе в дорогу 💎💎💎.\n```\n {citata()}```")
 @Bot.command(text_commands = True)
 async def GoodNight(ctx):
