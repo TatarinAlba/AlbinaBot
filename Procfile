@@ -1,1 +1,1 @@
-worker:  python Albina_Bot.py
+worker: python Albina_Bot.py
