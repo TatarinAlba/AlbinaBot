@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 from random import choice as cc
-import fileinput
+import os
 Bot = commands.Bot(command_prefix='!')
 def citata():
     cit = open('citata.txt', "r")
@@ -40,6 +40,10 @@ def randoma():
     Bag.write(our_choice + '\n')
     rem(our_choice)
     return our_choice
+@Bot.event
+async def on_ready():
+    print("Bot is online")
+
 @Bot.command(text_commands = True)
 async def hello(ctx):
     author = ctx.message.author
@@ -51,4 +55,4 @@ async def random(ctx):
 async def GoodNight(ctx):
     author = ctx.message.author
     await ctx.send(f"😊😊😊Спокойной ночи, сладких снов, {author.mention}. Удачи завтра 😊😊😊")
-Bot.run("Njk3MDE5OTY4NTcwNTIzNzMw.XoxPyw.EwkDq5On7dsro2LoVl1fLIqkG3o")
+token = os.environ.get('BOT_TOKEN')
