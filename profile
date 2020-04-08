@@ -1,0 +1,1 @@
+worker:  python Albina_Bot.py
