@@ -1,9 +1,11 @@
 import discord
 import fileinput
+from discrod.utils import get
 from discord.ext import commands
 from discord.ext.commands import Bot
 from random import choice as cc
 import os
+import youtube_dl
 quoters = [ 'Неграмотными людьми 21 века будут не те, кто не умеет читать и писать, а те, кто не умеет учиться и переучиваться. *Алвин Тоффлер*',
 'Нельзя научиться у того, кто постоянно с тобой соглашается. Дадли Филд Малоун',
 'Иди по жизни так, будто впереди всегда есть чему научиться и ты точно это сможешь сделать. *Вернон Говард*',
@@ -97,4 +99,66 @@ async def GoodNight(ctx):
 async def Quote(ctx):
     quoter = cc(quoters)
     await ctx.send(f"```\n {quoter}```")
+
+@Bot.command(text_commands = True)
+async def music(ctx):
+    global voice
+    channel = ctx.message.author.voice.channel
+    voice = get(Bot.voice_clients, guild =  ctx.guild)
+    
+    if voice and voice.is_connected():
+        await voice.move_to(channel)
+    else:
+        voice = await channel.connect()
+        await ctx.send(f'Альбина готова воспроизводить песни: {channel}')
+@Bot.command(text_commands = True)
+async def leave(ctx):
+    channel = ctx.message.author.voice.channel
+    voice = get(Bot.voice_clients, guild =  ctx.guild)
+
+    if voice and voice.is_connected():
+        await voice.disconnect()
+    else:
+        voice = await channel.connect()
+        await ctx.send(f'Альбина отключена от канала: {channel}')
+@Bot.command(text_commands = True)
+astnc def play(ctx, url: str):
+    song_there = os.path.isfile('song.mp3')
+    
+    try:
+        if song_there:
+            os.remove('song.mp3')
+            print('[log] Старый файл удален')
+    except PremissionError:
+        print('[log] Не удалось удалить файл')
+    await ctx.send('Минточку...')
+    
+    voice = get(Bot.voice_clients, guild = ctx.guild)
+    
+    ydl_opts = {
+        'format' : 'bestaudio/best'
+        'postprocessors' : [{
+            'key': 'FFmpegExctractAudio',
+            'preferredcodec' : 'mp3',
+            'preferredquality' : '192'
+        }]
+    }
+    
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        print('[log] Загружаем...')
+        ydl.download([url])
+    for file in os.listdit('./'):
+        if file.endsith('.mp3'):
+            name = file
+            print('[log] Переименовываю файл: {file}')
+            os.rename(file, 'song.mp3')
+    voice.play(discord.FFmpegPCMAudio('song.mp3'), after = lambda e: print(f'[log] {name}, музыка закончила свое проигрывание'))
+    voice.source = discord.PCMVolumeTransformer(voice.source)
+    voice.source.volume = 0.07
+    
+    song_name = name.rsplit('-', 2)
+    await ctx.senx(f'Сейчас проигрывает музыка: {song_name[0]}')
+    
 Bot.run(str(os.environ.get('BOT_TOKEN')))
+    
+    
