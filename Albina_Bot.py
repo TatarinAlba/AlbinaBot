@@ -121,44 +121,4 @@ async def leave(ctx):
     else:
         voice = await channel.connect()
         await ctx.send(f'Альбина отключена от канала: {channel}')
-@Bot.command(text_commands = True)
-astnc def play(ctx, url: str):
-    song_there = os.path.isfile('song.mp3')
-    
-    try:
-        if song_there:
-            os.remove('song.mp3')
-            print('[log] Старый файл удален')
-    except PremissionError:
-        print('[log] Не удалось удалить файл')
-    await ctx.send('Минточку...')
-    
-    voice = get(Bot.voice_clients, guild = ctx.guild)
-    
-    ydl_opts = {
-        'format' : 'bestaudio/best'
-        'postprocessors' : [{
-            'key': 'FFmpegExctractAudio',
-            'preferredcodec' : 'mp3',
-            'preferredquality' : '192'
-        }]
-    }
-    
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        print('[log] Загружаем...')
-        ydl.download([url])
-    for file in os.listdit('./'):
-        if file.endsith('.mp3'):
-            name = file
-            print('[log] Переименовываю файл: {file}')
-            os.rename(file, 'song.mp3')
-    voice.play(discord.FFmpegPCMAudio('song.mp3'), after = lambda e: print(f'[log] {name}, музыка закончила свое проигрывание'))
-    voice.source = discord.PCMVolumeTransformer(voice.source)
-    voice.source.volume = 0.07
-    
-    song_name = name.rsplit('-', 2)
-    await ctx.senx(f'Сейчас проигрывает музыка: {song_name[0]}')
-    
 Bot.run(str(os.environ.get('BOT_TOKEN')))
-    
-    
