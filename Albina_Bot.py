@@ -55,7 +55,6 @@ async def gn(ctx):
 async def quoter(text_commands = True):
     quoter = cc(quoters)
     await ctx.send(f"```\n {quoter}```")
-Bot.run(str(os.environ.get('BOT_TOKEN')))
 @Bot.event
     async def on_message(message):
     await ctx.send("Вы можете написать какое либо сообщение, чтобы начать общение с ботом")
@@ -66,3 +65,4 @@ Bot.run(str(os.environ.get('BOT_TOKEN')))
     request.query = message
     response = json.loads(request.getresponse().read().decode('utf-8'))
     await ctx.send(response['result']['fulfillment']['speech'])
+Bot.run(str(os.environ.get('BOT_TOKEN')))
