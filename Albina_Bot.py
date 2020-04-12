@@ -1,3 +1,5 @@
+import apiai
+import json
 import discord
 import fileinput
 from discord.ext import commands
@@ -10,12 +12,6 @@ quoters = [ 'Неграмотными людьми 21 века будут не �
 'Развивайте страсть к обучению. Если у вас получится, то вы всегда будете расти. *Энтони Жд. ДиАнжело*',
 'Мы учимся, когда мы что-то делаем. *Джордж Херберт*',
 'Заполнить свой разум миллионов разных фактов, но при этом ничему не научиться вполне возможно.*Алек Борн.*']
-import discord
-import fileinput
-from discord.ext import commands
-from discord.ext.commands import Bot
-from random import choice as cc
-import os
 members = ['Абрамова',
 'Авхадеев',
 'Алтунин',
@@ -45,21 +41,27 @@ Bot = commands.Bot(command_prefix='!')
 @Bot.command(text_commands = True)
 async def hello(ctx):
     author = ctx.message.author
-    await ctx.send(f"Ну привет, {author.mention} :*")
+    await ctx.send(f"Ну привет, {author.mention}. Ха-ха-ха-ха-ха")
 @Bot.command(text_commands = True)
-async def Random(ctx):
-    user = choice(message.channel.guild.members)
-    quoter = choice(quoters)
-    await ctx.send(f"💎💎💎 Ну что же!!! Сегодня на охоту отправляется 😎😎😎||{user}|| 😎😎😎. Удачи мой друг!!!. Цитатку тебе в дорогу 💎💎💎.\n```\n {quoter}```")
+async def random(ctx):
     winner = cc(members)
     quoter = cc(quoters)
     await ctx.send(f"💎💎💎 Ну что же!!! Сегодня на охоту отправляется 😎😎😎||{winner}|| 😎😎😎. Удачи мой друг!!!. Цитатку тебе в дорогу 💎💎💎.\n```\n {quoter}```")
 @Bot.command(text_commands = True)
-async def GoodNight(ctx):
+async def gn(ctx):
     author = ctx.message.author
     await ctx.send(f"😊😊😊Спокойной ночи, сладких снов, {author.mention}. Удачи завтра 😊😊😊")
 @Bot.command(text_commands = True)
-async def Quote(text_commands = True):
+async def quoter(text_commands = True):
     quoter = cc(quoters)
     await ctx.send(f"```\n {quoter}```")
 Bot.run(str(os.environ.get('BOT_TOKEN')))
+@Bot.command(text_commands = True)
+asnyc def talk(ctx)
+        await ctx.send("Вы можете написать какое либо сообщение, чтобы начать общение с ботом")
+        while send_message != "smalltalk.greetings.bye"
+            def send_message(message):
+            ok = ctx
+            await ctx.send(ctx)
+
+
