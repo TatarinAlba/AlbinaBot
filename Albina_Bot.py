@@ -56,12 +56,13 @@ async def quoter(text_commands = True):
     quoter = cc(quoters)
     await ctx.send(f"```\n {quoter}```")
 Bot.run(str(os.environ.get('BOT_TOKEN')))
-@Bot.command(text_commands = True)
-asnyc def talk(ctx)
-        await ctx.send("Вы можете написать какое либо сообщение, чтобы начать общение с ботом")
-        while send_message != "smalltalk.greetings.bye"
-            def send_message(message):
-            ok = ctx
-            await ctx.send(ctx)
-
-
+@Bot.event
+    async def on_message(message):
+    await ctx.send("Вы можете написать какое либо сообщение, чтобы начать общение с ботом")
+    async def send_message(message):
+    request = apiai.ApiAI("4a66b62af37a451f9b7c701be99e4d8e").text_request()
+    request.lang = 'ru'
+    request.session_id = 'session_1'
+    request.query = message
+    response = json.loads(request.getresponse().read().decode('utf-8'))
+    await ctx.send(response['result']['fulfillment']['speech'])
