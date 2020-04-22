@@ -48,9 +48,6 @@ async def hello(ctx):
     await ctx.send(f"Ну привет, {author.mention}")
 @Bot.command(text_commands = True)
 async def Random(ctx):
-    user = choice(message.channel.guild.members)
-    quoter = choice(quoters)
-    await ctx.send(f"💎💎💎 Ну что же!!! Сегодня на охоту отправляется 😎😎😎||{user}|| 😎😎😎. Удачи мой друг!!!. Цитатку тебе в дорогу 💎💎💎.\n```\n {quoter}```")
     winner = cc(members)
     quoter = cc(quoters)
     await ctx.send(f"💎💎💎 Ну что же!!! Сегодня на охоту отправляется 😎😎😎||{winner}|| 😎😎😎. Удачи мой друг!!!. Цитатку тебе в дорогу 💎💎💎.\n```\n {quoter}```")
@@ -60,5 +57,5 @@ async def GoodNight(ctx):
     await ctx.send(f"Спокойной ночи, сладких снов, {author.mention}. Удачи завтра")
 @Bot.command(text_commands = True)
 async def Quote(text_commands = True):
-    quoter = choice(quoters)
+    quoter = cc(quoters)
 Bot.run(str(os.environ.get('BOT_TOKEN')))
