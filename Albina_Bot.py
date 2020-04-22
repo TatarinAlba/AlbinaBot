@@ -1,7 +1,6 @@
 import apiai
 import json
 import discord
-import fileinput
 from discord.ext import commands
 from discord.ext.commands import Bot
 from random import choice as cc
@@ -50,7 +49,7 @@ async def random(ctx):
 @Bot.command(text_commands = True)
 async def gn(ctx):
     author = ctx.message.author
-    await ctx.send(f"😊😊😊Спокойной ночи, сладких снов, {author.mention}. Удачи завтра 😊😊😊")
+    await ctx.send(f"Спокойной ночи, {author.mention}.")
 @Bot.command(text_commands = True)
 async def quoter(text_commands = True):
     quoter = cc(quoters)
